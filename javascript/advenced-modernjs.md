@@ -39,20 +39,20 @@ ES6에서는 스코프 문제를 해결함과 동시에, 명확한 변수 사용
 ```javascript
 // 기존의 var 방식
 if (true) {
-  var location = "seoul";
+  var location = 'seoul';
 }
 console.log(location); // seoul
 
 // let 방식
 if (true) {
-  let location = "seoul";
+  let location = 'seoul';
 }
-console.log(foo); // Uncaught ReferenceError: foo is not defined
+console.log(location); // Uncaught ReferenceError: foo is not defined
                   // 블록 스코프 개념을 추가 함으로써 변수의 오용을 막고 프로그램 버그를 줄일 수 있습니다.
 
 // const 방식
 if (true) {
-  const gender = "male";
+  const gender = 'male';
   gender = 100;      // Uncaught TypeError: Assignment to constant variable
                      // 바뀌면 안되는 값을 상수로 지정함으로써 명확한 의도대로 코딩하고 버그를 줄일 수 있습니다.
 }
@@ -156,7 +156,7 @@ console.log(`${firstName} ${lastName} is a ${gender}`);
 const sayHello = (person) => {
   return `Hello, ${person.name.firstName} ${person.name.lastName} from ${person.country}!`
 }
-console.log(sayHello(person)); // "Hello, Youngkyun Kim from South Korea!"
+console.log(sayHello(person)); // Hello, Youngkyun Kim from South Korea!
 
 // 변수에서 비구조화 할당
 const { name: { firstName, lastName }, gender } = person;
@@ -166,7 +166,7 @@ console.log(`${firstName} ${lastName} is a ${gender}`);
 const sayHelloDestructured = ({ name: { firstName, lastName }, country }) => {
   return `Hello, ${firstName} ${lastName} from ${country}!`
 }
-console.log(sayHelloDestructured(person)); // "Hello, Youngkyun Kim from South Korea!"
+console.log(sayHelloDestructured(person)); // Hello, Youngkyun Kim from South Korea!
 ```
 
 ## 템플릿 리터럴
@@ -175,7 +175,7 @@ console.log(sayHelloDestructured(person)); // "Hello, Youngkyun Kim from South K
 const now = new Date().toString()
 
 // 기존 방식
-console.log("안녕하세요.\n지금 시각은 " + now + " 입니다.");
+console.log('안녕하세요.\n지금 시각은 ' + now + ' 입니다.');
 
 // 템플릿 리터럴 사용
 console.log(`안녕하세요.\n지금 시각은 ${now} 입니다.`);

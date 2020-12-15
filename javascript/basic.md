@@ -35,25 +35,25 @@
 ### 출력
 
 ```javascript
-console.log("Hello!"); // Hello!
+console.log('Hello!'); // Hello!
 ```
 
 ### 변수
 
 ```javascript
 // 문자열
-var greeting = "Hello";
+var greeting = 'Hello';
 
 // 블록 스코프 변수 (ES6+)
-let mutable = "This is mutable block-scoped variable";
-const immutable = "This is immutable block-scoped variable";
+let mutable = 'This is mutable block-scoped variable';
+const immutable = 'This is immutable block-scoped variable';
 
 // 숫자
 let twoHundred = 200; // Integer
 let pi = 3.141592; // Float
 
 // 배열
-let items = [1, "two", []];
+let items = [1, 'two', []];
 
 // 배열의 원소 접근하기
 console.log(items[1]) // two
@@ -124,7 +124,7 @@ console.log(isGreaterThanFifty(51)); // true
 ### 반복문
 
 ```javascript
-let companies = ["Apple", "Google", "Amazon"];
+let companies = ['Apple', 'Google', 'Amazon'];
 
 // for 반복문
 for(let i=0; i < companies.length; i++) {
@@ -164,18 +164,18 @@ console.log(x **= 10); // 1024
 
 // 이항 연산자
 console.log(100 + 1); // 101
-console.log("100" + 1); // 1001
-console.log("Hello" + " " + "there"); // Hello there
+console.log('100' + 1); // 1001
+console.log('Hello' + ' ' + 'there'); // Hello there
 console.log(100 - 1); // 99
-console.log("100" - 1); // 99
-console.log("Hello" - "there"); // NaN
+console.log('100' - 1); // 99
+console.log('Hello' - 'there'); // NaN
 console.log(5 * 4); // 20
 console.log(20 / 3); // 6.666666666666667
 
 // 비교 연산자
-console.log(1 == "1");  // true
-console.log(1 != "1");  // false
-console.log(1 === "1"); // false
+console.log(1 == '1');  // true
+console.log(1 != '1');  // false
+console.log(1 === '1'); // false
 console.log(1 === 1);   // true
 console.log(1 !== 1);   // false
 console.log(1 < 2);     // true
@@ -190,25 +190,25 @@ console.log(false || false);  // false
 
 // 삼항 연산자
 let age = 25
-let isAdult = (19 < age) ? "adult" : "minor";
+let isAdult = (19 < age) ? 'adult' : 'minor';
 ```
 
 ### 에러 핸들링
 
 ```javascript
 let dividedByZero = 100 / 0;
-console.log("divided by 0. is it ok? result is : " + dividedByZero);
+console.log('divided by 0. is it ok? result is : ' + dividedByZero);
 
 // try-catch문
 const divide = function (A, B) {
   if (B == 0) {
-    throw new Error("Divide by zero is not acceptable");
+    throw new Error('Divide by zero is not acceptable');
   }
   return A / B;
 }
 try {
   let dividedByZero = divide(100, 0);
-  console.log("divided by 0. is it ok? result is : " + dividedByZero);
+  console.log('divided by 0. is it ok? result is : ' + dividedByZero);
 } catch (err) {
   console.error(err);
 }
@@ -235,22 +235,22 @@ document.body.lastElementChild // ...
 
 // 2. <script> 태그를 삽입하여 코드를 실행해보기
 let script = document.createElement('script');
-script.src = "./";
-script.type = "text/javascript";
+script.src = './';
+script.type = 'text/javascript';
 script.onload = function () {
-  alert("스크립트 바인딩 완료. 페이지를 클릭해보세요.")
+  alert('스크립트 바인딩 완료. 페이지를 클릭해보세요.')
   let clickCount = 3;
   let clickCallback = function (e) {
     if (clickCount < 1) {
-      alert("스크립트 바인딩을 삭제합니다.")
-      document.body.removeEventListener("click", clickCallback);
+      alert('스크립트 바인딩을 삭제합니다.')
+      document.body.removeEventListener('click', clickCallback);
       script.parentNode.removeChild(script);
     } else {
       alert(`남은 클릭 횟수: ${clickCount}`);
     }
     clickCount--;
   };
-  document.body.addEventListener("click", clickCallback);
+  document.body.addEventListener('click', clickCallback);
 }
 document.getElementsByTagName('head')[0].appendChild(script);
 ```
@@ -274,7 +274,7 @@ window.setTimeout     // 일정 시간 이후에 콜백 함수를 비동기적�
 window.setInterval    // 일정 시간 이후에 콜백 함수를 비동기적으로 실행시켜주는 함수
 
 // 2. location, history를 이용해 브라우저 주소 이동 해보기
-location.href = "https://google.com"
+location.href = 'https://google.com'
 history.back()
 
 const state = { 'page_id': 1, 'user_id': 5 }
@@ -301,8 +301,8 @@ document.cookie
 // localStorage 사용 예시
 // sessionStorage도 문법은 동일하나, 윈도우나 브라우저 탭을 닫을 경우 데이터가 삭제됩니다.
 localStorage.length
-localStorage.setItem("foo", "bar") // 로컬스토리지에 값 저장
-localStorage.getItem("foo") // 값 불러오기
+localStorage.setItem('foo', 'bar') // 로컬스토리지에 값 저장
+localStorage.getItem('foo') // 값 불러오기
 ```
 
 ## 서버 통신
@@ -316,40 +316,37 @@ localStorage.getItem("foo") // 값 불러오기
 ```javascript
 // 1. XMLHttpRequest 사용 방법
 var oReq = new XMLHttpRequest();
-oReq.addEventListener("load", function () {
+oReq.addEventListener('load', function () {
     // console.log(this)
     console.log(this.responseText);
 });
-oReq.open("GET", "http://www.example.org");
+oReq.open('GET', 'https://jsonplaceholder.typicode.com/todos/1');
 oReq.send();
 
 // 2. Fetch API 사용 방법
 // GET Example
-fetch("http://www.example.org")
-.then(function(response) {
-    console.log(response)
-    return response.statusText;
-})
-.catch(function(err) {
-    console.log(err);
-});
+fetch('https://jsonplaceholder.typicode.com/todos/1')
+  .then(response => response.json())
+  .then(json => console.log(json))
+  .catch(console.err)
 
 // POST Example
-const data = {answer: 42}
-fetch('http://example.com/answer', {
-    method: 'POST', // *GET, POST, PUT, DELETE, etc.
-    mode: 'cors', // no-cors, cors, *same-origin
-    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-    credentials: 'same-origin', // include, *same-origin, omit
+fetch('https://jsonplaceholder.typicode.com/posts', {
+    method: 'POST',
     headers: {
-        'Content-Type': 'application/json',
-        // 'Content-Type': 'application/x-www-form-urlencoded',
+      'Content-Type': 'application/json',
     },
-    redirect: 'follow', // manual, *follow, error
-    referrer: 'no-referrer', // no-referrer, *client
-    body: JSON.stringify(data), // body data type must match "Content-Type" header
-})
-.then(response => response.json()); // parses JSON response into native JavaScript objects 
+    redirect: 'follow',
+    body: JSON.stringify({
+      userId: 1,
+      id: 1,
+      title: 'title',
+      body: 'body'
+    }),
+  })
+  .then(response => response.json())
+  .then(console.log)
+  .catch(console.err)
 
 ```
 
