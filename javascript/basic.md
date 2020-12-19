@@ -312,6 +312,7 @@ localStorage.getItem('foo') // 값 불러오기
 - [AJAX(Asynchronous JavaScript And XML)](https://developer.mozilla.org/ko/docs/Glossary/AJAX)
 - [XMLHttpRequest](https://developer.mozilla.org/ko/docs/Web/API/XMLHttpRequest)
 - [Fetch](https://developer.mozilla.org/ko/docs/Web/API/Fetch_API)
+- [JSON(Javascript Object Notation)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON)
 
 ```javascript
 // 1. XMLHttpRequest 사용 방법
