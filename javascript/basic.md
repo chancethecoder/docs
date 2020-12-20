@@ -222,7 +222,7 @@ try {
 
 [HTML](https://ko.wikipedia.org/wiki/HTML)은 계층 구조를 가지며, 하나의 노드 트리로 표현될 수 있습니다. 이러한 논리적인 HTML 문서 트리를 자바스크립트 상에서 컨트롤 가능한 API로 제공하는 것이 [DOM](https://developer.mozilla.org/en-US/docs/Glossary/DOM)입니다.
 
-> 참고: 모든 DOM은 **document**로 시작합니다.
+> - 모든 DOM은 **document**로 시작합니다.
 
 ```javascript
 // 1. DOM 객체 확인하기
@@ -254,10 +254,10 @@ document.getElementsByTagName('head')[0].appendChild(script);
 
 ### BOM (Browser Object Model)
 
-브라우저와 상호작용하여 이를 컨트롤할 수 있도록 제공되는 API 모음이 BOM입니다. BOM을 통해 브라우저 네이티브한 기능들을 활용할 수 있습니다.
+브라우저와 상호작용하며 브라우저 네이티브한 기능을 컨트롤할 수 있도록 제공되는 API 모음이 BOM입니다.
 
-> 참고: 모든 DOM은 **window**로 시작합니다.
-> 참고: window는 전역 객체이며, 생략이 가능합니다. ex) `window.alert`는 `alert`와 동일
+> - 모든 DOM은 **window**로 시작합니다.
+> - window는 전역 객체이며, 생략이 가능합니다. ex) `window.alert`는 `alert`와 동일
 
 ```javascript
 // 1. BOM 객체 확인
