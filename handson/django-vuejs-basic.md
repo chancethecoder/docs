@@ -831,17 +831,10 @@
 
     ```bash
     # frontend 디렉토리에서 아래 명령어 실행
+    cd frontend
     npm run dev
     ```
 
 5. [http://localhost:8080](http://localhost:8080)에 접속해봅니다. vue 프로젝트를 생성했을 때 최초 화면이 보입니다.
 
-## 블로그 CRUD 연결
-
-django의 백엔드 동작을 구현하고, 이를 앞단의 view와 연결하여 동작하는 것까지 구현해보겠습니다.
-
-1. 프론트엔드에서 백엔드 호출 셋업
-
-```bash
-npm install axios --save
-```
+6. 이제 기존에 만들었던 블로그 화면을 vuejs에 구현해보겠습니다. 여기서부터는 라이브 코딩으로 진행하겠습니다!
