@@ -19,7 +19,7 @@ HTML을 살펴보기 전에 HTML의 개념을 좀 더 이해하기 위해 웹 �
 3. 문서 검색 = 문서 위치 입력
 4. 문서 표현 = 브라우저
 
-[아이패드 그림 here]
+![](https://www.dropbox.com/s/mpiaazej5js3bne/%ED%95%84%EA%B8%B0-6.jpg?dl=0)
 
 여기서 주목해야할 것은 문서 표현 단계입니다. 문서 표현 단계에서 브라우저는 최종적으로 전달된 정적 파일(HTML, CSS, Javascript)을 **해석**하여 시각적으로 그려주는 역할을 합니다. 이 때 문제가 발생하는데, 작성된 정적 파일은 동일한데 브라우저 별로 해석하는 방식과 성능이 다르기 때문에 사용자가 어떤 브라우저를 통해 웹 페이지를 보는지가 웹 개발자에게는 중요한 문제가 됐습니다.
 
@@ -203,7 +203,10 @@ accept, accept-charset, accesskey, action, align, alt, async, autocomplete, auto
 <html>
     <head>
         <title>HTML 문서에 속성을 지정해봅시다.</title>
+
+        <!-- style은 문서 내 요소에 스타일을 지정할 때 쓰는 태그입니다. style 태그 안에서는 CSS 문법을 따릅니다. -->
         <style>
+            /* 요소 내의 class 속성값을 통해 지정합니다. */
             .greeting {
                 color: purple;
             }
@@ -211,9 +214,14 @@ accept, accept-charset, accesskey, action, align, alt, async, autocomplete, auto
             .hidden {
                 display: none;
             }
+
+            /* 요소 내의 id 속성값을 통해 지정합니다. */
+            #some-div-wrapper {
+                display: block;
+            }
         </style>
 
-        <!-- script 태그는 위에서 설명되지 않았지만 자주 사용되는 태그입니다. 주로 자바스크립트 코드를 통해 페이지 내의 동작을 관리합니다. -->
+        <!-- script는 자바스크립트 코드를 통해 페이지의 다양한 동작을 구현할 때 쓰는 태그합니다. script 태그 안에서는 자바스크립트 문법을 따릅니다. -->
         <script>
             function toggleGreeting() {
                 // 1. 문서 내의 id 속성을 기반으로 특정 요소를 찾아옵니다.
