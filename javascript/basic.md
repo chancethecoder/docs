@@ -357,9 +357,7 @@ fetch('https://jsonplaceholder.typicode.com/posts', {
 ### 클라이언트
 
 - [React](https://ko.reactjs.org/)
-  - [Redux](https://redux.js.org/)
 - [Vue](https://kr.vuejs.org/)
-  - [Vuex](https://vuex.vuejs.org/kr/)
 - [Angular](https://angular.io/)
 - [jQuery](https://jquery.com/)
 - [Svelte](https://svelte.dev/)
