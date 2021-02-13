@@ -253,6 +253,41 @@ const sayHello = ({ name: { firstName, lastName }, country }) => {
 console.log(sayHello(person)); // Hello, Youngkyun Kim from South Korea!
 ```
 
+### 비구조화 할당을 활용한 RORO 패턴
+
+RORO (Receive Object Return Object) 패턴은 비구조화 할당 문법을 활용한 자바스크립트 프로그래밍 패턴 중 하나입니다. 해당 패턴을 통해 [**명명된 매개변수(Named Parameter)**](https://en.wikipedia.org/wiki/Named_parameter)라는 프로그래밍 개념을 유사하게 구현할 수 있으며, 아이디어의 구체적인 내용은 [해당 블로그 포스트](https://www.freecodecamp.org/news/elegant-patterns-in-modern-javascript-roro-be01e7669cbd/)에서 확인할 수 있습니다.
+
+RORO 패턴의 사용법은 아래와 같습니다.
+
+```javascript
+// Bad
+// 각 전달하는 인자가 어떤 역할을 하는건지 알기 어렵다.
+addNewControl("Title", 20, 50, 100, 50, true);
+
+// Good
+// 인자의 기능을 명확하게 이해할 수 있다.
+addNewControl({
+  title: "Title",
+  xPosition: 20,
+  yPosition: 50,
+  width: 100,
+  height: 50,
+  drawingNow: True
+})
+
+// 비구조화 할당을 문법을 활용해 구현된 RORO 패턴 함수 선언
+function addNewControl({
+  title,
+  xPosition: xAxis, // alias 가능
+  yPosition,
+  width=200, // default 값 지정 가능
+  height,
+  drawingNow
+}) {
+  // code here
+}
+```
+
 ## 템플릿 리터럴
 
 [템플릿 리터럴](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Template_literals)은 문자열 내부에 자바스크립트 표현식을 넣을 수 있는 문법입니다.
