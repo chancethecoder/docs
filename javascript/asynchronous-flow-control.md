@@ -11,46 +11,35 @@
 **동기 코드 방식**: 비동기 코드의 순서를 보장받을 수 없다.
 
 ```javascript
-function request(url) {
-  let response;
-  const xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = function() {
-    if (xhr.readyState == 4 && xhr.status == 200) {
-      response = xhr.responseText; // 2. 서버에서 받은 응답을 결과에 저장
-    } else {
-      response = xhr.status;
-    }
-  };
-  xhr.open('GET', url);
-  xhr.send(); // 1. 서버 요청
-  return response; // 3. 결과 반환 -> 문제점: 2번의 응답값이 저장 될때까지 기다려 주지 않는다.
+function greetingAfterOneSecond() {
+  setTimeout(function () {
+    console.log('greeting!')
+  }, 1000)
 }
 
-const res = request('https://jsonplaceholder.typicode.com/todos/1');
-console.log(res) // 4. 출력 -> undefined
+greetingAfterOneSecond()
+console.log('This is synchronous!')
+
+// This is synchronous!
+// greeting!
 ```
 
 **콜백 방식**: 비동기 코드의 순서를 보장받을 수 있다.
 
 ```javascript
-function request(url, successCallback, failCallback) {
-  const xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = function() {
-    if (xhr.readyState == 4 && xhr.status == 200) {
-      successCallback(xhr.responseText); // 2. 결과값을 콜백의 인자로 전달
-    } else {
-      failCallback(xhr.status);
-    }
-  };
-  xhr.open('GET', url);
-  xhr.send(); // 1. 요청
+function greetingAfterOneSecond(callback) {
+  setTimeout(function () {
+    console.log('greeting!')
+    callback()
+  }, 1000)
 }
 
-request('https://jsonplaceholder.typicode.com/todos/1', function (res) {
-  console.log(res) // 3. 콜백에서 출력 -> {...}
-}, function (res) {
-  /* on failed */
+greetingAfterOneSecond(function () {
+  console.log('This is asynchronous!')
 })
+
+// greeting!
+// This is asynchronous!
 ```
 
 콜백 방식으로 비동기 흐름을 제어하는 것은 현재까지도 사용되고 있으나, (아래에서 소개할) 모던 자바스크립트에서 새로 도입된 프로미스 문법과 async/await 문법을 사용하는 것을 권장하고 있습니다.
