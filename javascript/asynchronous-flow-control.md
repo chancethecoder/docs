@@ -94,9 +94,9 @@ const myPromise = new Promise(function (resolve, reject) {
 
 ### 프로미스 실행부: 콜백 or then-catch
 
-선언을 통해 생성된 프로미스 객체의 실행 결과는 콜백 혹은 `then`, `catch` 함수로 전달받을 수 있습니다. 실행되는 이후에 `fulfilled` 혹은 `rejected` 둘 중에 하나의 상태로 결정되며, 어떤 값이든 결정되어 다음 `then`으로 전달된 상태를 `settled`라고 합니다.
+선언을 통해 생성된 프로미스 객체의 실행 결과는 콜백 혹은 `then`, `catch` 함수로 전달받을 수 있습니다. `fulfilled` 혹은 `rejected` 둘 중에 어떤 값이든 결정되어 다음 이어지는 `then`으로 전달된 상태를 `settled`라고 합니다.
 
-특히, `then`과 `catch` 함수의 반환 값은 프로미스 객체이므로 프로미스를 서로 연결할 수 있게 됩니다.
+특히, `then`과 `catch` 함수의 반환 값은 프로미스 객체이므로 프로미스를 연쇄적으로 연결할 수 있습니다.
 
 콜백 형태의 프로미스 실행:
 
@@ -216,7 +216,11 @@ doSomething()
 
 ### 프로미스의 에러 처리
 
-복잡한 프로미스 체이닝의 경우 적절한 에러 핸들링을 통해 깔끔한 코드 흐름을 만들 수 있습니다. 아래 예시를 보겠습니다.
+복잡한 프로미스 체이닝의 경우 적절한 에러 핸들링을 통해 깔끔한 코드 흐름을 만들 수 있습니다. 아래 흐름도를 보겠습니다.
+
+![](./assets/asynchronouse-flow-control-fig-1.jpeg)
+
+해당 흐름도는 상품 결제 요청을 처리한다고 가정했을 때, 일련의 프로세스를 표현한 그림입니다. 아래는 해당 흐름도에 대한 프로미스 체이닝 구현이라고 할 수 있습니다.
 
 ```javascript
 // 상품 결제 요청을 처리하는 프로미스 체이닝
@@ -239,54 +243,62 @@ spinnerOn()
   .finally(spinnerOff)
 ```
 
-위의 코드는 아래의 흐름도에 대한 프로미스 체이닝 구현이라고 할 수 있습니다.
-
-![](./assets/asynchronouse-flow-control-fig-1.jpeg)
-
 복잡한 로직을 적절한 에러 핸들링 코드와 프로미스 체이닝을 통해 명확하고 가독성있는 코드를 만들 수 있습니다.
 
 ## Async/Await
 
-`async`, `await`는 ES8에서 도입된 자바스크립트 문법입니다. 비동기 코드를 일반적인 동기 코드와 동일한 형태로 작성할 수 있다는 장점이 있으며, try-catch 구문과 함께 사용하면 강력하고 간결한 코드 작성이 가능합니다.
+`async-await`는 ES8에서 도입된 자바스크립트 문법입니다.
+
+비동기 코드를 일반적인 동기 코드와 동일한 형태로 작성할 수 있다는 장점이 있으며, `try-catch` 구문과 함께 사용하면 강력하고 간결한 코드 작성이 가능합니다.
 
 다만, 브라우저 호환성의 이슈가 발생할 수 있으며 old browser를 지원해야 하는 상황이라면 꼭 babel을 통해 트랜스파일을 해줘야 합니다.
 
-### Async 코드에서의 에러 처리
+### Async/Await 사용법
 
-프로미스의 에러 처리에서는 프로미스 체이닝을 통해 구현했었습니다. 하지만, 이는 일반적인 동기코드의 모양과 매우 다르며, 동작하는 스코프 문제로 인해 try-catch 구문을 사용할 수 없습니다. 아래 예제를 살펴보겠습니다.
-
-프로미스 체이닝 방식: try-catch 구문을 통해 에러 제어가 불가능한 문제점
+`async-await`는 함수의 선언부와 실행부에서 `function` 키워드와 함께 사용합니다.
 
 ```javascript
-try {
-  // 프로미스 내에서 발생하는 에러는 프로미스 객체 내의 스코프에서만 제어 가능합니다.
-  spinnerOn()
-    .then(getOrderInfo)
-    .then(checkOutOfStock)
-    .then(getPaymentInfo)
-    .then(doPayment)
-    .then(savePaymentInfo)
-    .then(saveStockInfo)
-    .then(saveOrderInfo)
-    .then(saveShippingInfo)
-    .then(redirectToOrderResultPage)
-} catch (e) {
-  // 아래와 같이 에러 핸들링 불가능
-  if (e instanceof OutOfStock) {
-    redirectToOrderPage()
-  } else if (e instanceof InvalidPaymentInfo) {
-    redirectToPaymentPage()
-  } else {
-    throw e
-  }
-} finally {
-  spinnerOff()
+// 선언부
+async function asyncFunction() {
+  /* 비동기 작업 */
+  return data
 }
+
+// 실행부
+const data = await asyncFunction()
 ```
 
-async 구문에서는 try-catch 문법과 함께 사용하여 완벽히 동기 코드와 동일한 모양의 코드를 작성할 수 있습니다.
+또한, `async-await`는 프로미스와 함께 사용 가능합니다.
 
-async 구문의 에러 처리:
+```javascript
+// 프로미스 객체 선언
+const myPromise = new Promise(function(resolve, reject) {
+  /* 비동기 작업 */
+  if (!err) resolve(result)
+  else reject(err)
+})
+
+// 프로미스 객체를 await
+const data = await myPromise()
+
+// async 함수 선언
+async function asyncFunction() {
+  /* 비동기 작업 */
+}
+
+// async 함수를 then으로 체이닝
+asyncFunction()
+  .then(result => console.log(result))
+  .catch(err => console.error(err))
+```
+
+### Async 코드에서의 에러 처리
+
+프로미스의 에러 처리에서는 프로미스 체이닝을 통해 구현했었습니다. 하지만, 이는 일반적인 동기코드의 모양과 매우 다르며, 스코프 문제로 인해 `try-catch` 구문을 활용할 수 없습니다.
+
+하지만, `async` 구문에서는 `try-catch` 문법과 함께 사용하여 완전히 동기 코드와 동일한 모양의 코드를 작성할 수 있습니다.
+
+아래는 `async` 구문과 `try-catch`를 활용한 비동기 코드의 흐름 제어 예시입니다.
 
 ```javascript
 try {
