@@ -4,11 +4,11 @@
 
 ## 비동기 흐름과 콜백
 
-대부분의 자바스크립트 코드에서는 [비동기 흐름](https://developer.mozilla.org/ko/docs/Learn/JavaScript/Asynchronous/Concepts)이 발생할 수 밖에 없습니다. 이 때 타이밍을 제대로 제어하지 못하면 개발자가 의도한대로 프로그램이 동작하지 않으며, 버그로 이어질 수 밖에 없습니다.
+대부분의 자바스크립트 코드에서는 [비동기 작업](https://developer.mozilla.org/ko/docs/Learn/JavaScript/Asynchronous/Concepts)이 발생합니다. 이 때 코드가 동작하는 타이밍을 정확하게 제어하지 못하면 개발자가 의도한대로 프로그램이 동작하지 않으며, 버그로 이어질 수 밖에 없습니다.
 
-자바스크립트에서는 비동기 흐름을 제어하기 위해 전통적으로 **콜백** 방식을 사용했습니다. 아래에서는 비동기 작업을 동기 코드로 작성했을 때의 문제점과, 이를 해소하는 콜백 예시를 살펴보겠습니다.
+자바스크립트에서는 비동기 흐름을 제어하기 위해 전통적으로 [콜백](https://ko.wikipedia.org/wiki/%EC%BD%9C%EB%B0%B1) 방식을 사용했습니다. 아래에서는 비동기 작업을 동기 코드 방식으로 작성했을 때의 모습과, 문제점을 해결하는 콜백 방식의 예시를 살펴보겠습니다.
 
-동기 코드 방식: 비동기 코드의 순서를 보장받을 수 없다.
+**동기 코드 방식**: 비동기 코드의 순서를 보장받을 수 없다.
 
 ```javascript
 function request(url) {
@@ -30,7 +30,7 @@ const res = request('https://jsonplaceholder.typicode.com/todos/1');
 console.log(res) // 4. 출력 -> undefined
 ```
 
-콜백 방식: 비동기 코드의 순서를 보장받을 수 있다.
+**콜백 방식**: 비동기 코드의 순서를 보장받을 수 있다.
 
 ```javascript
 function request(url, successCallback, failCallback) {
@@ -53,29 +53,35 @@ request('https://jsonplaceholder.typicode.com/todos/1', function (res) {
 })
 ```
 
+콜백 방식으로 비동기 흐름을 제어하는 것은 현재까지도 사용되고 있으나, (아래에서 소개할) 모던 자바스크립트에서 새로 도입된 프로미스 문법과 async/await 문법을 사용하는 것을 권장하고 있습니다.
+
 ## 프로미스
 
-[프로미스](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Promise)는 ES6부터 도입된 자바스크립트 문법으로, 비동기 흐름을 제어할 때 주로 사용합니다. 프로미스는 현재 결정된 값을 반환받는 것이 아니라, 미래에 결정될 어떤 결과를 대리자로 받는 것이라고 생각할 수 있습니다.
+[프로미스](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Promise)는 ES6에서 도입된 자바스크립트 문법으로, 비동기 흐름을 제어할 때 사용됩니다. 프로미스는 현재 결정된 값을 반환하는 것이 아니라, 미래에 결정될 어떤 결과를 **대리자**를 통해 받는 것이라고 생각할 수 있습니다.
 
-### 프로미스의 상태와 resolve/reject
+### 프로미스 선언부: 상태와 resolve/reject
 
-프로미스는 아래의 세 가지 상태값을 가질 수 있습니다.
+![](https://mdn.mozillademos.org/files/8633/promises.png)
+
+프로미스 선언부에서 프로미스는 아래의 세 가지 상태값을 가질 수 있습니다.
 
 - 대기(*Pending*) : 비동기 처리 로직이 아직 완료되지 않은 상태
 - 완료(*Fulfilled*) : 비동기 처리가 완료되어 프로미스가 결과 값을 반환해준 상태
 - 실패(*Rejected*) : 비동기 처리가 실패하거나 오류가 발생한 상태
 
-프로미스 객체를 생성하면 최초에 *pending* 상태로 존재합니다.
-
-```javascript
-new Promise(); // pending
-```
-
-*pending* 상태의 프로미스 객체에서 `resolve`를 실행하면 *fulfilled* 상태가 됩니다.
+프로미스 객체를 생성할 땐 `resolve`, `reject` 두 개의 파라미터를 가진 함수를 인자로 받으며, 최초에 *pending* 상태로 존재합니다.
 
 ```javascript
 new Promise(function (resolve, reject) {
-  resolve(); // fulfilled
+  // state: pending
+})
+```
+
+*pending* 상태의 프로미스 객체 내에서 `resolve`가 실행되면 *fulfilled* 상태가 됩니다.
+
+```javascript
+new Promise(function (resolve, reject) {
+  resolve(); // state: pending -> fulfilled
 })
 ```
 
@@ -83,7 +89,7 @@ new Promise(function (resolve, reject) {
 
 ```javascript
 new Promise(function (resolve, reject) {
-  reject(); // rejected
+  reject(); // state: pending -> rejected
 })
 ```
 
@@ -92,21 +98,35 @@ new Promise(function (resolve, reject) {
 ```javascript
 const myPromise = new Promise(function (resolve, reject) {
   // ...
-  if (!err) resolve(result);
-  else reject(err);
+  if (!err) resolve(result); // 성공적으로 결과 전달
+  else reject(err); // 뭔가 실패했을 경우
 });
+```
 
-// then-catch 형태
+### 프로미스 실행부: 콜백 or then-catch
+
+선언을 통해 생성된 프로미스 객체의 실행 결과는 콜백 혹은 `then`, `catch` 함수로 전달받을 수 있습니다. 실행되는 이후에 `fulfilled` 혹은 `rejected` 둘 중에 하나의 상태로 결정되며, 어떤 값이든 결정되어 다음 `then`으로 전달된 상태를 `settled`라고 합니다.
+
+특히, `then`과 `catch` 함수의 반환 값은 프로미스 객체이므로 프로미스를 서로 연결할 수 있게 됩니다.
+
+콜백 형태의 프로미스 실행:
+
+```javascript
+myPromise(function(result) {
+  /* if fulfilled */
+  console.log(result)
+}, function(err) {
+  /* if rejected */
+  console.error(err)
+})
+```
+
+then 형태의 프로미스 실행:
+
+```javascript
 myPromise()
   .then(result => {/* ... */}) // if fulfilled
   .catch(err => {/* ... */}) // if rejected
-
-// 콜백 형태
-myPromise(function(result) {
-  /* if fulfilled */
-}, function(err) {
-  /* if rejected */
-})
 ```
 
 #### Quiz
