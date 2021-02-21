@@ -1,12 +1,12 @@
 # HTML 개요
 
-[HTML(Hyper Text Markup Language)](https://en.wikipedia.org/wiki/HTML)은 웹 페이지 문서를 표현하기 위한 마크업 언어입니다. 과거에는 정보 전달 기능이 주요 목적이었으며 말 그대로 구조적인 문서를 표현하기 위해 개발되었지만, 웹의 비약적인 발전으로 인해 사용자들이 폭발적으로 늘어 현재는 대부분의 웹 페이지를 구성하는 대중적인 언어가 되었습니다.
+[HTML\(Hyper Text Markup Language\)](https://en.wikipedia.org/wiki/HTML)은 웹 페이지 문서를 표현하기 위한 마크업 언어입니다. 과거에는 정보 전달 기능이 주요 목적이었으며 말 그대로 구조적인 문서를 표현하기 위해 개발되었지만, 웹의 비약적인 발전으로 인해 사용자들이 폭발적으로 늘어 현재는 대부분의 웹 페이지를 구성하는 대중적인 언어가 되었습니다.
 
-현대의 웹 페이지는 HTML만으로 구성되어 있지는 않습니다. 크게 두 가지를 추가해야 하는데, [CSS(Cascading Style Sheet)](https://en.wikipedia.org/wiki/CSS)와 [Javascript](https://en.wikipedia.org/wiki/JavaScript)입니다. 이들 각각이 웹 페이지에서 하는 역할을 보면 아래와 같습니다.
+현대의 웹 페이지는 HTML만으로 구성되어 있지는 않습니다. 크게 두 가지를 추가해야 하는데, [CSS\(Cascading Style Sheet\)](https://en.wikipedia.org/wiki/CSS)와 [Javascript](https://en.wikipedia.org/wiki/JavaScript)입니다. 이들 각각이 웹 페이지에서 하는 역할을 보면 아래와 같습니다.
 
-- **HTML**: 정보 전달
-- **CSS**: 디자인 표현
-- **Javascript**: 상호 작용
+* **HTML**: 정보 전달
+* **CSS**: 디자인 표현
+* **Javascript**: 상호 작용
 
 이 세 가지는 현재 웹 페이지를 구성하는 기본 요소로 여겨지며, 웹 페이지를 직접 작성하는 개발자가 아니더라도 기본적인 상식으로 알고 있으면 많은 도움이 될 수 있습니다.
 
@@ -14,22 +14,22 @@
 
 HTML을 살펴보기 전에 HTML의 개념을 좀 더 이해하기 위해 웹 페이지가 우리에게 전달되는 과정을 생각해봅시다. 과정은 크게 아래와 같이 나눌 수 있습니다.
 
-1. 문서 작성 = 정적 파일 (HTML, CSS, Javascript)
+1. 문서 작성 = 정적 파일 \(HTML, CSS, Javascript\)
 2. 문서 저장 = 로컬 PC, 서버
 3. 문서 검색 = 문서 위치 입력
 4. 문서 표현 = 브라우저
 
-![](./figure-1.jpeg)
+![](../.gitbook/assets/figure-1.jpeg)
 
-여기서 주목해야할 것은 문서 표현 단계입니다. 문서 표현 단계에서 브라우저는 최종적으로 전달된 정적 파일(HTML, CSS, Javascript)을 **해석**하여 시각적으로 그려주는 역할을 합니다. 이 때 문제가 발생하는데, 작성된 정적 파일은 동일한데 브라우저 별로 해석하는 방식과 성능이 다르기 때문에 사용자가 어떤 브라우저를 통해 웹 페이지를 보는지가 웹 개발자에게는 중요한 문제가 됐습니다.
+여기서 주목해야할 것은 문서 표현 단계입니다. 문서 표현 단계에서 브라우저는 최종적으로 전달된 정적 파일\(HTML, CSS, Javascript\)을 **해석**하여 시각적으로 그려주는 역할을 합니다. 이 때 문제가 발생하는데, 작성된 정적 파일은 동일한데 브라우저 별로 해석하는 방식과 성능이 다르기 때문에 사용자가 어떤 브라우저를 통해 웹 페이지를 보는지가 웹 개발자에게는 중요한 문제가 됐습니다.
 
 이는 브라우저의 시장 점유율에 따라 웹 기술이 영향을 받는 결과를 초래하게 되었고, 한 때 웹 개발자들을 괴롭히는 이슈였습니다. 하지만 이는 웹 표준화 및 다양한 해결 방법을 통해 대부분 해소되었고, 결과적으로 현재 시점으로 전 세계에서 가장 많이 사용되는 브라우저인 [크롬 브라우저](https://en.wikipedia.org/wiki/Google_Chrome)를 기준점으로 생각하면 됩니다.
 
-## 요소 (Elements)
+## 요소 \(Elements\)
 
-[요소(Elements)](https://en.wikipedia.org/wiki/HTML_element)는 HTML 문서를 구성하는 기본 단위입니다. 다른 용어로 태그(Tag)라고 불리기도 합니다. 여는 기호(<)와 닫는 기호(>)로 표현되며, 아래와 같은 태그들이 존재합니다. ([w3schools.com](https://www.w3schools.com/tags/) 참고)
+[요소\(Elements\)](https://en.wikipedia.org/wiki/HTML_element)는 HTML 문서를 구성하는 기본 단위입니다. 다른 용어로 태그\(Tag\)라고 불리기도 합니다. 여는 기호\(&lt;\)와 닫는 기호\(&gt;\)로 표현되며, 아래와 같은 태그들이 존재합니다. \([w3schools.com](https://www.w3schools.com/tags/) 참고\)
 
-```
+```text
 <!-->, <!DOCTYPE>, <a>, <abbr>, <acronym>, <address>, <applet>, <area>, <article>, <aside>, <audio>, <b>, <base>, <basefont>, <bdi>, <bdo>, <big>, <blockquote>, <body>, <br>, <button>, <canvas>, <caption>, <center>, <cite>, <code>, <col>, <colgroup>, <data>, <datalist>, <dd>, <del>, <details>, <dfn>, <dialog>, <dir>, <div>, <dl>, <dt>, <em>, <embed>, <fieldset>, <figcaption>, <figure>, <font>, <footer>, <form>, <frame>, <frameset>, <h1>, <h2>, <h3>, <h4>, <h5>, <h6>, <head>, <header>, <hr>, <html>, <i>, <iframe>, <img>, <input>, <ins>, <kbd>, <label>, <legend>, <li>, <link>, <main>, <map>, <mark>, <meta>, <meter>, <nav>, <noframes>, <noscript>, <object>, <ol>, <optgroup>, <option>, <output>, <p>, <param>, <picture>, <pre>, <progress>, <q>, <rp>, <rt>, <ruby>, <s>, <samp>, <script>, <section>, <select>, <small>, <source>, <span>, <strike>, <strong>, <style>, <sub>, <summary>, <sup>, <svg>, <table>, <tbody>, <td>, <template>, <textarea>, <tfoot>, <th>, <thead>, <time>, <title>, <tr>, <track>, <tt>, <u>, <ul>, <var>, <video>, <wbr>
 ```
 
@@ -37,7 +37,7 @@ HTML을 살펴보기 전에 HTML의 개념을 좀 더 이해하기 위해 웹 �
 
 HTML 문서의 기본 구조는 아래와 같습니다. 크게 보면 `head` 부분과 `body` 부분으로 나뉘며 이를 `html`로 감싸는 형태입니다.
 
-```html
+```markup
 <!DOCTYPE html>
 <html>
     <head>
@@ -53,10 +53,10 @@ HTML 문서의 기본 구조는 아래와 같습니다. 크게 보면 `head` 부
 
 아래 HTML 코드를 통해 직접 웹 페이지를 확인해봅시다. 웹 페이지 확인은 아래와 같은 방법으로 가능합니다.
 
-- 파일 저장해서 크롬 브라우저로 확인하기
-- [https://jsfiddle.net/](https://jsfiddle.net/) 에서 코드 실행하기
+* 파일 저장해서 크롬 브라우저로 확인하기
+* [https://jsfiddle.net/](https://jsfiddle.net/) 에서 코드 실행하기
 
-```html
+```markup
 <!DOCTYPE html>
 <html>
 <head>
@@ -188,17 +188,17 @@ HTML 문서의 기본 구조는 아래와 같습니다. 크게 보면 `head` 부
 </html>
 ```
 
-## 속성 (Attributes)
+## 속성 \(Attributes\)
 
-[속성(attributes)](https://en.wikipedia.org/wiki/HTML_attribute)은 HTML 요소를 제어하기 위해 태그 안에 추가적으로 제공되는 정보입니다. 이름-값 형태로 정의되며 아래와 같은 요소들이 정의됩니다.
+[속성\(attributes\)](https://en.wikipedia.org/wiki/HTML_attribute)은 HTML 요소를 제어하기 위해 태그 안에 추가적으로 제공되는 정보입니다. 이름-값 형태로 정의되며 아래와 같은 요소들이 정의됩니다.
 
-```
+```text
 accept, accept-charset, accesskey, action, align, alt, async, autocomplete, autofocus, autoplay, bgcolor, border, charset, checked, cite, class, color, cols, colspan, content, contenteditable, controls, coords, data, data-*, datetime, default, defer, dir, dirname, disabled, download, draggable, enctype, for, form, formaction, headers, height, hidden, high, href, hreflang, http-equiv, id, ismap, kind, label, lang, list, loop, low, max, maxlength, media, method, min, multiple, muted, name, novalidate, onabort, onafterprint, onbeforeprint, onbeforeunload, onblur, oncanplay, oncanplaythrough, onchange, onclick, oncontextmenu, oncopy, oncuechange, oncut, ondblclick, ondrag, ondragend, ondragenter, ondragleave, ondragover, ondragstart, ondrop, ondurationchange, onemptied, onended, onerror, onfocus, onhashchange, oninput, oninvalid, onkeydown, onkeypress, onkeyup, onload, onloadeddata, onloadedmetadata, onloadstart, onmousedown, onmousemove, onmouseout, onmouseover, onmouseup, onmousewheel, onoffline, ononline, onpagehide, onpageshow, onpaste, onpause, onplay, onplaying, onpopstate, onprogress, onratechange, onreset, onresize, onscroll, onsearch, onseeked, onseeking, onselect, onstalled, onstorage, onsubmit, onsuspend, ontimeupdate, ontoggle, onunload, onvolumechange, onwaiting, onwheel, open, optimum, pattern, placeholder, poster, preload, readonly, rel, required, reversed, rows, rowspan, sandbox, scope, selected, shape, size, sizes, span, spellcheck, src, srcdoc, srclang, srcset, start, step, style, tabindex, target, title, translate, type, usemap, value, width, wrap
 ```
 
 ### 속성 적용해보기
 
-```html
+```markup
 <!DOCTYPE html>
 <html>
     <head>
@@ -247,3 +247,4 @@ accept, accept-charset, accesskey, action, align, alt, async, autocomplete, auto
     </body>
 </html>
 ```
+
