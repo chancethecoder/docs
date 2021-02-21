@@ -1,7 +1,7 @@
 # Table of contents
 
 * [README](README.md)
-* [html](html/README.md)
+* [HTML](html/README.md)
   * [HTML 개요](html/basic.md)
 * [javascript](javascript/README.md)
   * [자바스크립트 개요](javascript/basic.md)
