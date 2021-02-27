@@ -6,17 +6,18 @@
 
 자바스크립트를 사용해서 아래와 같은 일들을 할 수 있습니다.
 
-- 웹 페이지 내 인터렉티브 동작
-- [서버 프로그래밍 (Nodejs)](https://nodejs.org/)
-- [모바일 어플리케이션 (React Native)](https://reactnative.dev/)
-- [데스크탑 어플리케이션 (Electron)](https://www.electronjs.org/)
-- [터미널 명령어 도구 작성](https://github.com/tj/commander.js)
+* 웹 페이지 내 인터렉티브 동작
+* [서버 프로그래밍 \(Nodejs\)](https://nodejs.org/)
+* [모바일 어플리케이션 \(React Native\)](https://reactnative.dev/)
+* [데스크탑 어플리케이션 \(Electron\)](https://www.electronjs.org/)
+* [터미널 명령어 도구 작성](https://github.com/tj/commander.js)
 
 ## 코드 실행해보기
 
-각 코드는 [크롬 브라우저 개발자 도구](https://developers.google.com/web/tools/chrome-devtools?hl=ko) > Console에서 연습해볼 수 있습니다.
-- 윈도우: ctrl + shift + I
-- 맥: cmd + opt + I
+각 코드는 [크롬 브라우저 개발자 도구](https://developers.google.com/web/tools/chrome-devtools?hl=ko) &gt; Console에서 연습해볼 수 있습니다.
+
+* 윈도우: ctrl + shift + I
+* 맥: cmd + opt + I
 
 ## 기본 문법
 
@@ -216,13 +217,13 @@ try {
 
 ## 브라우저
 
-브라우저(크롬, 익스플로러, 사파리 등)는 자바스크립트를 구동시키는 일종의 프로그램입니다. 웹 페이지 상에서 브라우저에 특화된 기능을 수행하기 위해서는 자바스크립트와 브라우저의 간극을 채워주는 무언가가 있어야 하는데요, 다음은 그러한 개념들을 간략하게 살펴보겠습니다.
+브라우저\(크롬, 익스플로러, 사파리 등\)는 자바스크립트를 구동시키는 일종의 프로그램입니다. 웹 페이지 상에서 브라우저에 특화된 기능을 수행하기 위해서는 자바스크립트와 브라우저의 간극을 채워주는 무언가가 있어야 하는데요, 다음은 그러한 개념들을 간략하게 살펴보겠습니다.
 
-### DOM (Document Object Model)
+### DOM \(Document Object Model\)
 
 [HTML](https://ko.wikipedia.org/wiki/HTML)은 계층 구조를 가지며, 하나의 노드 트리로 표현될 수 있습니다. 이러한 논리적인 HTML 문서 트리를 자바스크립트 상에서 컨트롤 가능한 API로 제공하는 것이 [DOM](https://developer.mozilla.org/en-US/docs/Glossary/DOM)입니다.
 
-> - 모든 DOM은 **document**로 시작합니다.
+> * 모든 DOM은 **document**로 시작합니다.
 
 ```javascript
 // 1. DOM 객체 확인하기
@@ -252,12 +253,12 @@ script.onload = function () {
 document.getElementsByTagName('head')[0].appendChild(script);
 ```
 
-### BOM (Browser Object Model)
+### BOM \(Browser Object Model\)
 
 브라우저와 상호작용하며 브라우저 네이티브한 기능을 컨트롤할 수 있도록 제공되는 API 모음이 BOM입니다.
 
-> - 모든 DOM은 **window**로 시작합니다.
-> - window는 전역 객체이며, 생략이 가능합니다. ex) `window.alert`는 `alert`와 동일
+> * 모든 DOM은 **window**로 시작합니다.
+> * window는 전역 객체이며, 생략이 가능합니다. ex\) `window.alert`는 `alert`와 동일
 
 ```javascript
 // 1. BOM 객체 확인
@@ -284,9 +285,9 @@ history.pushState(state, title, url) // history에 내용 추가
 
 프로그램을 구현하기 위해서 꼭 필요한 요소 중 하나는 저장소입니다. 자바스크립트에서 이를 구현할 수 있는 기능은 브라우저의 스토리지 관련 API를 사용하는 것입니다. 브라우저의 스토리지는 아래와 같은 API를 제공합니다.
 
-- localStorage
-- sessionStorage
-- cookie
+* localStorage
+* sessionStorage
+* cookie
 
 ```javascript
 // HTML5+
@@ -305,10 +306,10 @@ localStorage.getItem('foo') // 값 불러오기
 
 자바스크립트는 브라우저 내의 클라이언트 사이드 언어로써 주로 사용되었습니다. 여기서 필요한 기능 중 하나는 서버와의 상호작용이며, 이를 제공하기 위해 자바스크립트는 아래와 같은 개념과 방법들을 제공합니다.
 
-- [AJAX(Asynchronous JavaScript And XML)](https://developer.mozilla.org/ko/docs/Glossary/AJAX)
-- [XMLHttpRequest](https://developer.mozilla.org/ko/docs/Web/API/XMLHttpRequest)
-- [Fetch](https://developer.mozilla.org/ko/docs/Web/API/Fetch_API)
-- [JSON(Javascript Object Notation)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON)
+* [AJAX\(Asynchronous JavaScript And XML\)](https://developer.mozilla.org/ko/docs/Glossary/AJAX)
+* [XMLHttpRequest](https://developer.mozilla.org/ko/docs/Web/API/XMLHttpRequest)
+* [Fetch](https://developer.mozilla.org/ko/docs/Web/API/Fetch_API)
+* [JSON\(Javascript Object Notation\)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON)
 
 ```javascript
 // 1. XMLHttpRequest 사용 방법
@@ -344,7 +345,6 @@ fetch('https://jsonplaceholder.typicode.com/posts', {
   .then(response => response.json())
   .then(console.log)
   .catch(console.err)
-
 ```
 
 ## 프레임워크
@@ -356,17 +356,18 @@ fetch('https://jsonplaceholder.typicode.com/posts', {
 
 ### 클라이언트
 
-- [React](https://ko.reactjs.org/)
-- [Vue](https://kr.vuejs.org/)
-- [Angular](https://angular.io/)
-- [jQuery](https://jquery.com/)
-- [Svelte](https://svelte.dev/)
+* [React](https://ko.reactjs.org/)
+* [Vue](https://kr.vuejs.org/)
+* [Angular](https://angular.io/)
+* [jQuery](https://jquery.com/)
+* [Svelte](https://svelte.dev/)
 
 ### 서버사이드
 
-- [NodeJS](https://nodejs.org/)
-- [Express](https://expressjs.com/)
-- [SockerIO](https://github.com/socketio/socket.io)
-- [Sequelize](https://sequelize.org/)
-- [Nextjs](https://nextjs.org/)
-- [Deno](https://deno.land/)
+* [NodeJS](https://nodejs.org/)
+* [Express](https://expressjs.com/)
+* [SockerIO](https://github.com/socketio/socket.io)
+* [Sequelize](https://sequelize.org/)
+* [Nextjs](https://nextjs.org/)
+* [Deno](https://deno.land/)
+
