@@ -1,8 +1,12 @@
+---
+description: '목표: 모듈 번들러가 무엇인지, 왜 쓰는지, 어떤 것들이 있는지 살펴봅니다.'
+---
+
 # 모듈 번들러 개요
 
-> 목표: 모듈 번들러가 무엇인지, 왜 쓰는지, 어떤 것들이 있는지 등을 살펴봅니다.
+모듈 번들러는 다양한 리소스를 하나의 병합된 결과물로 만들어주는 도구입니다. 최적화된 결과물을 제공함으로써 서비스를 효율화 하는 것이 모듈 번들러의 도입 목적입니다.
 
-모듈 번들러는 다양한 리소스를 하나의 병합된 결롸물로 만들어주는 도구입니다. 현재 가장 많이 쓰이는 모듈 번들러 도구는 [webpack](https://webpack.js.org/)이며, 이 외에도 몇 가지 도구들을 알아보겠습니다.
+현재 가장 많이 쓰이는 모듈 번들러는 [webpack](https://webpack.js.org/)이며, 이 외에도 몇 가지 도구들을 아래에서 알아보겠습니다.
 
 ## 모듈이 뭔가요?
 
@@ -44,7 +48,7 @@ console.log(Calculator.substract(100, Calculator.circleArea(4)));
 
 자바스크립트에서 모듈 단위로 파일을 만들고, 이를 로딩했다고 생각해봅시다.
 
-```html
+```markup
 <html>
   <head>
     <script src="/src/module1.js"></script>
@@ -58,15 +62,15 @@ console.log(Calculator.substract(100, Calculator.circleArea(4)));
 
 여기서 문제점은 아래와 같습니다.
 
-1. 파일을 나눠서 전송받는 것은 하나의 파일로 합쳐서 전송받는 것에 비해 네트워크 측면에서 비효율적입니다.
-2. 함수 스코프인 자바스크립트에서는 이런 방식에서 변수 충돌이 일어날 수 있습니다. ex) module1의 변수를 module2의 변수가 전부 덮어써버리는 경우
-3. 로딩 순서에 따라 모듈 간의 의존성을 보장하기 어렵습니다.
+1. **파일을 나눠서 전송받는 것**은 하나의 파일로 합쳐서 전송받는 것에 비해 네트워크 측면에서 **비효율적**입니다.
+2. **함수 스코프**인 자바스크립트에서는 이런 방식에서 **변수 충돌**이 일어날 수 있습니다.
+3. 로딩 순서에 따라 **모듈 간의 의존성**을 보장하기 어렵습니다.
 
-이런 문제점을 해결하기 위해 도입된 것이 모듈 번들러 개념입니다.
+이런 문제점을 해결하기 위해 도입된 것이 모듈 번들러입니다.
 
-모듈 번들러는 모듈들을 모아서 하나의 병합된 번들 파일로 생성해줍니다. 그리고 최종적으로 사용자에게는 최적화된 번들 파일을 전달하게 됩니다. 이로써 개발은 모듈 단위로, 제공은 단일 파일로 하는 것이 가능해집니다.
+모듈 번들러는 모듈을 모아서 하나의 병합된 번들 파일로 생성하는 역할을 합니다. 그리고 최종적으로 사용자에게는 최적화된 번들 파일을 전달하게 됩니다. 이로써 개발은 모듈 단위로, 제공은 단일 파일로 하는 것이 가능해집니다.
 
-```html
+```markup
 <html>
   <head>
     <script src="/dist/bundle.js"></script>
@@ -76,12 +80,12 @@ console.log(Calculator.substract(100, Calculator.circleArea(4)));
 
 모듈 번들러는 파일 병합 뿐만 아니라 다양한 플러그인을 통해 기능을 확장하기도 합니다. 모듈 번들러가 할 수 있는 일들은 크게 아래와 같습니다.
 
-- 모듈 의존성 계산
-- 번들링
-- 압축
-- 난독화
-- [미사용 코드 제거 (Tree Shaking)](https://ui.toast.com/weekly-pick/ko_20180716)
-- [코드 스플릿](https://ko.reactjs.org/docs/code-splitting.html)
+* 모듈 의존성 계산
+* 번들링
+* 압축
+* 난독화
+* [미사용 코드 제거 \(Tree Shaking\)](https://ui.toast.com/weekly-pick/ko_20180716)
+* [코드 스플릿](https://ko.reactjs.org/docs/code-splitting.html)
 
 ## webpack
 
@@ -89,12 +93,12 @@ console.log(Calculator.substract(100, Calculator.circleArea(4)));
 
 주요 개념으로는 엔트리, 아웃풋, 로더가 있습니다.
 
-- 엔트리: 의존성 그래프의 시작점
-- 아웃풋: 번들링 결과물이 저장될 위치
-- 로더: 자바스크립트 뿐만 아니라 CSS, 이미지, 폰트 등의 리소스를 모듈 단위로 처리하기 위한 것
-- 플러그인: 번들링된 최종 결과물에 특정 기능을 수행하기 위한 것
+* 엔트리: 의존성 그래프의 시작점
+* 아웃풋: 번들링 결과물이 저장될 위치
+* 로더: 자바스크립트 뿐만 아니라 CSS, 이미지, 폰트 등의 리소스를 모듈 단위로 처리하기 위한 것
+* 플러그인: 번들링된 최종 결과물에 특정 기능을 수행하기 위한 것
 
-아래는 webpack 설정(`webpack.config.js`)의 예시입니다. (세부 설정: https://webpack.js.org/configuration/)
+아래는 webpack 설정\(`webpack.config.js`\)의 예시입니다. \(세부 설정: [https://webpack.js.org/configuration/](https://webpack.js.org/configuration/)\)
 
 ```javascript
 const path = require('path');
@@ -142,7 +146,7 @@ export default {
 };
 ```
 
-위 프로젝트에서 webpack을 통해 빌드를 수행하면 아래와 같은 결과물이 생성될겁니다. (실제와는 다를 수 있으나, 이해를 돕기 위한 내용입니다.)
+위 프로젝트에서 webpack을 통해 빌드를 수행하면 아래와 같은 결과물이 생성될겁니다. \(실제와는 다를 수 있으나, 이해를 돕기 위한 내용입니다.\)
 
 ```bash
 npx webpack --config webpack.config.js # webpack 번들링 수행하기
@@ -165,3 +169,4 @@ console.log(b(100, a(4)));
 ## rollup
 
 [rollup](https://rollupjs.org/)은 Tree Shaking이라고 하는 성능 최적화 부분에서 이점이 있는 모듈 번들러입니다. 다만 사용층이 Webpack 진영이 더욱 많고 개발도 활발하기 때문에 여러 측면에서 Webpack의 장점을 따라가지는 못하고 있습니다.
+
