@@ -1,6 +1,8 @@
-# REST API
+---
+description: '목표: REST API의 개념을 간단한 사용 예시와 함께 알아봅니다.'
+---
 
-> 목표: REST API의 개념을 간단한 사용 예시와 함께 알아봅니다.
+# REST API
 
 [REST\(REpresentational State Transfer\)](https://en.wikipedia.org/wiki/Representational_state_transfer)는 좀 더 이해하기 쉽고 표준화된 API 작성에 도움을 주는 개념이자 설계 원칙입니다.
 

@@ -7,7 +7,7 @@
   * [자바스크립트 개요](javascript/basic.md)
   * [ES6](javascript/es6.md)
   * [비동기 흐름 제어](javascript/asynchronous-flow-control.md)
-  * [스코프](javascript/scope.md)
+  * [스코프와 클로저](javascript/scope.md)
   * [모듈 번들러 개요](javascript/module-bundler.md)
 * [webdev 101](webdev101/README.md)
   * [REST API](webdev101/rest-api.md)
