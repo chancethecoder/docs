@@ -1,27 +1,29 @@
 ---
-description: '목표: 자바스크립트의 개념, 문법 등을 간단히 살펴보고 브라우저 핸들링, 서버 통신, 프레임워크에 대해 간략히 살펴봅니다.'
+description: '목표: 자바스크립트의 개념과 문법, Web API를 간단히 살펴봅니다.'
 ---
 
 # 자바스크립트 개요
 
 [자바스크립트](https://en.wikipedia.org/wiki/JavaScript)는 **사용자와 웹 페이지 간의 상호작용**을 구현하기 위해 만들어진 프로그래밍 언어입니다. 1995년도에 [브렌던 아이크](https://en.wikipedia.org/wiki/Brendan_Eich)에 의해 최초로 개발 되었으며, 인터넷과 브라우저의 발전 역사와 함께 다양한 변화를 겪었습니다.
 
-자바스크립트를 사용해서 아래와 같은 일들을 할 수 있습니다.
+최초 개발 이후, 월드와이드웹의 성공과 함께 자바스크립트의 인기는 폭발적으로 늘어 다양한 분야에서 사용 가능하도록 발전했습니다. 현재 자바스크립트를 사용하면 아래와 같은 일들을 할 수 있습니다.
 
 * 웹 페이지 내 인터렉티브 동작
 * [서버 프로그래밍 \(Nodejs\)](https://nodejs.org/)
 * [모바일 어플리케이션 \(React Native\)](https://reactnative.dev/)
 * [데스크탑 어플리케이션 \(Electron\)](https://www.electronjs.org/)
-* [터미널 명령어 도구 작성](https://github.com/tj/commander.js)
-
-## 코드 실행해보기
-
-각 코드는 [크롬 브라우저 개발자 도구](https://developers.google.com/web/tools/chrome-devtools?hl=ko) &gt; Console에서 연습해볼 수 있습니다.
-
-* 윈도우: ctrl + shift + I
-* 맥: cmd + opt + I
+* [터미널 명령어 도구 작성](https://github.com/tj/commander.js) 
 
 ## 기본 문법
+
+{% hint style="success" %}
+Tip: 코드 실행하기
+
+아래에서 배울 자바스크립트 코드는 브라우저의 개발자 도구를 통해서 연습해볼 수 있습니다. [크롬의 브라우저 개발자 도구](https://developers.google.com/web/tools/chrome-devtools?hl=ko)를 여는 방법은 아래와 같습니다.
+
+* 윈도우: `ctrl` + `shift` + `I`
+* 맥: `cmd` + `opt` + `I`
+{% endhint %}
 
 ### 주석
 
@@ -199,33 +201,37 @@ let isAdult = (19 < age) ? 'adult' : 'minor';
 ### 에러 핸들링
 
 ```javascript
-let dividedByZero = 100 / 0;
-console.log('divided by 0. is it ok? result is : ' + dividedByZero);
-
-// try-catch문
 const divide = function (A, B) {
   if (B == 0) {
+    // throw 문법
     throw new Error('Divide by zero is not acceptable');
   }
   return A / B;
 }
+
+// try-catch 문법
 try {
   let dividedByZero = divide(100, 0);
-  console.log('divided by 0. is it ok? result is : ' + dividedByZero);
+  console.log('divided by 0 success.');
 } catch (err) {
+  // Error handling
   console.error(err);
 }
+
+let dividedByZero = 100 / 0; // Error: Divide by zero is not acceptable
 ```
 
-## 브라우저
+## Web API
 
-브라우저\(크롬, 익스플로러, 사파리 등\)는 자바스크립트를 구동시키는 일종의 프로그램입니다. 웹 페이지 상에서 브라우저에 특화된 기능을 수행하기 위해서는 자바스크립트와 브라우저의 간극을 채워주는 무언가가 있어야 하는데요, 다음은 그러한 개념들을 간략하게 살펴보겠습니다.
+[Web API](https://developer.mozilla.org/ko/docs/Web/API)는 자바스크립트를 통해 브라우저의 유용한 작업들을 수행할 수 있도록 정의된 API의 모음입니다. 가장 흔하게 사용되는 API로 DOM이 있으며, 이외에도 디바이스 정보, 데이터 저장, 통신 등 다양한 기능을 수행하기위한 API들이 정의되어있습니다.
+
+다음은 Web API에서 중요한 항목들을 간략하게 살펴보겠습니다.
 
 ### DOM \(Document Object Model\)
 
-[HTML](https://ko.wikipedia.org/wiki/HTML)은 계층 구조를 가지며, 하나의 노드 트리로 표현될 수 있습니다. 이러한 논리적인 HTML 문서 트리를 자바스크립트 상에서 컨트롤 가능한 API로 제공하는 것이 [DOM](https://developer.mozilla.org/en-US/docs/Glossary/DOM)입니다.
+HTML은 계층 구조를 가지며, 하나의 [노드 트리](https://ko.javascript.info/dom-nodes)로 표현될 수 있습니다. 이러한 논리적인 HTML 문서 트리를 자바스크립트 상에서 컨트롤 가능한 API로 제공하는 것이 [DOM](https://developer.mozilla.org/en-US/docs/Glossary/DOM)입니다.
 
-> * 모든 DOM은 **document**로 시작합니다.
+모든 DOM API는 `document`로 시작하며, 이는 모든 브라우저에서 동일합니다. 아래에서 DOM을 사용하는 코드 예시를 살펴보겠습니다.
 
 ```javascript
 // 1. DOM 객체 확인하기
@@ -257,10 +263,9 @@ document.getElementsByTagName('head')[0].appendChild(script);
 
 ### BOM \(Browser Object Model\)
 
-브라우저와 상호작용하며 브라우저 네이티브한 기능을 컨트롤할 수 있도록 제공되는 API 모음이 BOM입니다.
+브라우저와 상호작용하며 브라우저를 컨트롤할 수 있도록 제공되는 API 모음이 [BOM](https://www.w3schools.com/js/js_window.asp)입니다.
 
-> * 모든 DOM은 **window**로 시작합니다.
-> * window는 전역 객체이며, 생략이 가능합니다. ex\) `window.alert`는 `alert`와 동일
+모든 BOM API는 `window`로 시작하며, 이는 모든 브라우저에서 동일합니다. 또한, `window`는 전역 객체이며 프로퍼티나 메소드를 사용할 때 `window`를 생략하여 사용할 수 있습니다.
 
 ```javascript
 // 1. BOM 객체 확인
@@ -304,72 +309,41 @@ localStorage.setItem('foo', 'bar') // 로컬스토리지에 값 저장
 localStorage.getItem('foo') // 값 불러오기
 ```
 
-## 서버 통신
+### 서버 통신
 
-자바스크립트는 브라우저 내의 클라이언트 사이드 언어로써 주로 사용되었습니다. 여기서 필요한 기능 중 하나는 서버와의 상호작용이며, 이를 제공하기 위해 자바스크립트는 아래와 같은 개념과 방법들을 제공합니다.
+{% hint style="info" %}
+Tip: 자바스크립트의 서버 통신을 살펴보기 전에 아래의 개념들을 먼저 이해하는것이 좋습니다.
 
 * [AJAX\(Asynchronous JavaScript And XML\)](https://developer.mozilla.org/ko/docs/Glossary/AJAX)
+* [JSON\(Javascript Object Notation\)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON)
+{% endhint %}
+
+자바스크립트는 전통적으로 브라우저 내의 클라이언트사이드 언어로 사용되었습니다. 여기서 필요한 핵심 기능 중 하나는 서버와의 통신입니다. 자바스크립트에서 통신 기능을 제공하기 위해 아래와 같은 Web API들을 제공합니다.
+
 * [XMLHttpRequest](https://developer.mozilla.org/ko/docs/Web/API/XMLHttpRequest)
 * [Fetch](https://developer.mozilla.org/ko/docs/Web/API/Fetch_API)
-* [JSON\(Javascript Object Notation\)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON)
+
+아래에서 각각의 코드 예시를 통해 살펴보겠습니다.
+
+#### XMLHttpRequest
 
 ```javascript
-// 1. XMLHttpRequest 사용 방법
+// Example
 var oReq = new XMLHttpRequest();
 oReq.addEventListener('load', function () {
-    // console.log(this)
     console.log(this.responseText);
 });
 oReq.open('GET', 'https://jsonplaceholder.typicode.com/todos/1');
 oReq.send();
+```
 
-// 2. Fetch API 사용 방법
-// GET Example
+#### Fetch API
+
+```javascript
+// Example
 fetch('https://jsonplaceholder.typicode.com/todos/1')
   .then(response => response.json())
   .then(json => console.log(json))
   .catch(console.err)
-
-// POST Example
-fetch('https://jsonplaceholder.typicode.com/posts', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    redirect: 'follow',
-    body: JSON.stringify({
-      userId: 1,
-      id: 1,
-      title: 'title',
-      body: 'body'
-    }),
-  })
-  .then(response => response.json())
-  .then(console.log)
-  .catch(console.err)
 ```
-
-## 프레임워크
-
-> **프레임워크란?**  
-> 프로그램을 구현하는 데 필요한 특정 구조 혹은 틀을 제공하는 것입니다. 라이브러리나 클래스의 모음으로 구성됩니다.
-
-자바스크립트를 통한 웹 페이지 개발에 생산성을 더해 줄 프레임워크들은 다양하게 존재합니다. 아래는 현재 많이 쓰이고 있는 자바스크립트 관련 프레임워크의 일부입니다.
-
-### 클라이언트
-
-* [React](https://ko.reactjs.org/)
-* [Vue](https://kr.vuejs.org/)
-* [Angular](https://angular.io/)
-* [jQuery](https://jquery.com/)
-* [Svelte](https://svelte.dev/)
-
-### 서버사이드
-
-* [NodeJS](https://nodejs.org/)
-* [Express](https://expressjs.com/)
-* [SockerIO](https://github.com/socketio/socket.io)
-* [Sequelize](https://sequelize.org/)
-* [Nextjs](https://nextjs.org/)
-* [Deno](https://deno.land/)
 

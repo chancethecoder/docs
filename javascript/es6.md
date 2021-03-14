@@ -23,9 +23,7 @@ ES6를 알아야 하는 이유는, ES6에서 추가된 내용이 [현대적인 �
 
 ## 블록 범위 생성자
 
-자바스크립트 변수의 스코프는 크게 두 가지가 있습니다.
-
-> 스코프: 변수에 접근 가능한 범위
+자바스크립트 변수의 [스코프](scope.md#undefined-3)는 크게 두 가지가 있습니다.
 
 1. **함수 레벨 스코프**: 함수 블록 내에서 선언된 변수는 함수 내에서만 접근 가능
 2. **블록 레벨 스코프**: 함수를 포함한 모든 코드 블록\(`if` 문, `for` 문, `while` 문, `try/catch` 문 등\) 내에서 선언된 변수는 코드 블록 내에서만 접근 가능
@@ -111,7 +109,9 @@ console.log(materials.map((material) => { // [8, 6, 7, 9]
 
 ## 클래스
 
-많은 프로그래밍 언어에서 클래스라고 하는 객체 추상화 개념을 지원하고 있습니다. 기존의 자바스크립트에서는 이와 비슷한 개념으로 [프로토타입](https://developer.mozilla.org/ko/docs/Web/JavaScript/Guide/Inheritance_and_the_prototype_chain)을 지원했지만, 프로토타입에서 아쉬웠던 부분을 해소하기 위해 ES6에서부터 [클래스](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Classes) 문법을 제공합니다.
+많은 프로그래밍 언어에서 클래스라고 하는 객체 추상화 개념을 지원하고 있습니다.
+
+기존의 자바스크립트에서는 이와 비슷한 개념으로 [프로토타입](https://developer.mozilla.org/ko/docs/Web/JavaScript/Guide/Inheritance_and_the_prototype_chain)을 지원했지만, 프로토타입에서 아쉬웠던 부분을 해소하기 위해 ES6부터 [클래스](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Classes) 문법을 제공합니다.
 
 ```javascript
 // 기존의 프로토타입 문법
@@ -143,20 +143,21 @@ console.log(new Rectangle(5, 8).area()); // 40
 
 ## 프로미스
 
-기존의 자바스크립트에서는 [비동기 흐름](https://developer.mozilla.org/ko/docs/Learn/JavaScript/Asynchronous/Introducing)을 제어할 수 있는 방법이 다양하지 않았습니다. 하지만, ES6부터 [Promise](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Promise) 문법을 지원하여 비동기 흐름을 더욱 효과적이고 쉽게 제어할 수 있도록 기능을 제공하고 있습니다.
+기존의 자바스크립트에서는 [비동기 흐름을 제어](asynchronous-flow-control.md)할 수 있는 방법이 다양하지 않았습니다. 하지만 ES6부터 [Promise](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Promise) 문법을 지원하여 비동기 흐름을 더욱 효과적이고 쉽게 제어할 수 있도록 기능을 제공하고 있습니다.
 
-> 참고: 비동기 흐름 제어를 위해 아래와 같은 문법도 사용 가능합니다.
->
-> * [제너레이터 함수 \(ES6+\)](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Statements/function*)
-> * [Async 함수 \(ES8+\)](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Statements/async_function)
+아래에서는 기존의 전통적인 방식의 문제점과 이를 Promise로 해결하는것을 확인해보겠습니다.
 
 ### 콜백 지옥
 
-> callback: 함수에 함수를 인자로 전달하고, 해당 함수가 실행된 뒤 마지막에 인자로 전달된 함수를 실행하는 것.
+{% hint style="info" %}
+Note: callback?
 
-기존의 자바스크립트에서는 비동기 흐름을 컨트롤하기 위해 이벤트 혹은 콜백 개념을 사용했습니다. 하지만, 콜백의 사용은 [콜백 지옥 \(callback hell\)](http://callbackhell.com/)이라고 불리는 문제점을 발생시켰으며 이로 인해 복잡성이 증가하고 가독성이 떨어지는 코드가 만들어지곤 했습니다.
+함수를 인자로 받는 함수가 있을 때, 해당 함수 내에서 코드를 수행한 뒤 인자로 받은 함수를 마지막에 호출하는 것이 콜백 함수입니다.
+{% endhint %}
 
-콜백 지옥이 무엇인지 아래 예제로 확인해보겠습니다.
+자바스크립트는 전통적으로 콜백 방식으로 비동기 흐름을 제어했습니다. 하지만, 이런 코드 스타일에서 [콜백 지옥\(callback hell\)](http://callbackhell.com/)이라고 불리는 문제점이 자주 발생되었습니다.
+
+콜백 지옥이란, 콜백이 과도하게 중첩되어 코드 가독성을 심각하게 저해하는 현상을 말합니다. 아래 예제로 확인해보겠습니다.
 
 ```javascript
 // API 호출을 위한 wrapper 함수
@@ -184,9 +185,15 @@ request(`${baseUrl}/users/1`, (user) => {
 })
 ```
 
+해당 코드는 통신이 순차적으로 일어나는 흐름을 `request`함수와 콜백으로 구현한 코드입니다.
+
+`request` 함수의 콜백으로 또 다른 `request`함수가 쓰이며, 이를 계속해서 중첩해가면서 코드의 indent가 계속적으로 늘어나는것을 볼 수 있습니다. 이는 사람이 보기에 부자연스러운 코드가 생성되는 결과를 초래합니다.
+
+물론 해당 예제의 코드만 보면 문제라고 느껴지지 않을 수도 있지만, 코드의 규모가 커지면 커질수록 상상하기 어려울 정도로 코드 복잡도가 올라가게 되며 이는 자바스크립트 개발자들이 공감하는 문제점 중 하나로 꼽힙니다.
+
 ### 프로미스 체이닝
 
-프로미스는 콜백 지옥을 완벽하게 해결할 수 있도록 도와줍니다. 아래는 프로미스를 도입하여 콜백 지옥을 어떻게 해결하는지 보여주는 예제입니다.
+프로미스는 콜백 지옥을 완벽하게 해결할 수 있도록 도와줍니다. 아래 예제를 살펴보겠습니다.
 
 ```javascript
 // API 호출을 위한 wrapper 함수
@@ -214,6 +221,14 @@ requestPromise(`${baseUrl}/users/1`)
   .then(comments => console.log(`comments length: ${comments.length}`))
   .catch(err => console.error(err))
 ```
+
+먼저 프로미스 객체를 반환하는 `requestPromise` 함수가 있습니다. 해당 함수가 반환하는 프로미스 객체는 위에서 본 `request` 함수를 감싸주는 역할을 할 뿐입니다. 20번 줄에서 `requestPromise`함수를 호출했기때문에 프로미스 객체가 반환되었습니다.
+
+이어서 프로미스 객체는 `then`이라는 메소드로 연결됩니다. 프로미스는 `then`을 만나면 프로미스 객체 내부의 동작이 수행되어 완료될때까지 다음 줄로 진행되지 않고 기다립니다. 프로미스 객체의 내부 동작이 완료되면 비로소 결과를 반환하며, 이는 `then`에서 이어받아 사용할 수 있게 됩니다.
+
+그럼 해당 결과를 또 다시 `requestPromise` 함수에 인자로 사용하여 다음 `request`로 이어주는 식으로 연쇄적인 흐름이 이어집니다.
+
+이런 패턴의 장점은 콜백 지옥의 indent로 인한 가독성 저해 문제를 해결할 수 있다는 점입니다. 동일한 depth의 indent를 유지하는것만으로도 코드 가독성이 향상되는것입니다.
 
 ## 비구조화 할당
 
